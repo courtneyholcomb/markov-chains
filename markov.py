@@ -1,6 +1,6 @@
 """Generate Markov text from text files."""
 
-import random #import choice
+from random import choice
 
 
 def open_and_read_file(file_path):
@@ -10,7 +10,7 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    return open(file_path).read().replace("\n", " ")
+    return open(file_path).read().replace("\n", " ").rstrip()
 
 
 def make_chains(text_string):
@@ -57,23 +57,27 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+
     # while loop:
     while True:
         # if words == []
         # choose random key tuple from chains & add key[0] & key[1] to words list
         if words == []:
-            current_key = random.choice(list(chains))
+            current_key = choice(list(chains))
             words.extend([current_key[0], current_key[1]])
 
+        # for latest two words in list (current_key)
         current_key = (words[-2], words[-1])
-        chosen_word = random.choice(chains[current_key])
-        words.append(chosen_word)
 
-    
-    # for latest two words in list (current_key),
-    # pick random word from chains[(word1, word2)] (chosen_word)
-    # add that word to words list
+        # try, except KeyError: break
+        try:
+            # pick random word from chains[(word1, word2)] (chosen_word)
+            chosen_word = choice(chains[current_key])
+            # add that word to words list
+            words.append(chosen_word)
 
+        except KeyError:
+            break
 
     return " ".join(words)
 
