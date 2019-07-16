@@ -62,7 +62,7 @@ def make_text(chains):
     while True:
         # if words == []
         # choose random key tuple from chains & add key[0] & key[1] to words list
-        if words == []:
+        if words == []:  # exercise! find another way to check empty list
             current_key = choice(list(chains))
             words.extend([current_key[0], current_key[1]])
 
