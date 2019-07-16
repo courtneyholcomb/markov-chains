@@ -10,9 +10,7 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
-
-    return "Contents of your file as one long string"
+    return open(file_path).read().replace("\n", " ")
 
 
 def make_chains(text_string):
@@ -42,7 +40,14 @@ def make_chains(text_string):
 
     chains = {}
 
-    # your code goes here
+    # split into list
+    words = text_string.split(" ")
+    # loop through range of list length
+    for i in range(len(words) - 2):
+        # create tuple for list[i] and list[i+1] as dict key
+        bi_gram = (words[i], words[i + 1])
+            # chains[tuple] = chains.get(chains[tuple] + next_word, next_word)
+        chains[bi_gram] = chains.get(bi_gram, []) + [words[i + 2]]
 
     return chains
 
