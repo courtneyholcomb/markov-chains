@@ -12,18 +12,19 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    return open(file_path).read().replace("\n", " ").replace("  ", " ").rstrip()
+    with open(file_path) as file:
+        return file.read()
     # text2 = open(file_path2).read().replace("\n", " ").replace("  ", " ").rstrip()
 
 
 def make_chains(text_string, n):
     """Take input text as string; return dictionary of Markov chains.
     """
-    
+
     chains = {}
 
     # split into list
-    words = text_string.split(" ")
+    words = text_string.split()
 
     # loop through range of list length
     for i in range(len(words) - n):
@@ -85,9 +86,7 @@ def make_text(chains):
         for i in range(len(strung_words)):
 
             if strung_words[-i] in punctuation:
-                last_punct = -i
-                strung_words = strung_words[:last_punct + 1]
-                # print(last_punct)
+                strung_words = strung_words[:-i + 1]
                 break
 
     return strung_words
