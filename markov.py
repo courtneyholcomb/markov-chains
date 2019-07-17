@@ -19,20 +19,7 @@ def open_and_read_file(file_path):
 def make_chains(text_string, n):
     """Take input text as string; return dictionary of Markov chains.
     """
-
-    # chains = {}
-
-    # # split into list
-    # words = text_string.split(" ")
-    # # loop through range of list length
-    # for i in range(len(words) - 2):
-    #     # create tuple for list[i] and list[i+1] as dict key
-    #     bi_gram = (words[i], words[i + 1])
-    #     # chains[tuple] = chains.get(chains[tuple] + next_word, next_word)
-    #     chains[bi_gram] = chains.get(bi_gram, []) + [words[i + 2]]
-
-    # return chains
-
+    
     chains = {}
 
     # split into list
@@ -53,7 +40,7 @@ def compare_two_sources(source1, source2):
     for key in source1:
         # if match, add source1[key] to source2[key]
         # if no match, create key and add value
-        source2[key] = source2.get(key, []) + [source1[key]]
+        source2[key] = source2.get(key, []) + source1[key]
 
     return source2
     
@@ -85,6 +72,7 @@ def make_text(chains):
             chosen_word = choice(chains[current_key])
             # add that word to words list
             words.append(chosen_word)
+            # print(chosen_word)
 
         except KeyError:
             break
